@@ -1,5 +1,5 @@
 package bank;
 
 public enum TransactionType {
-    DEBIT, BANK, CREDIT
+    DEBIT, BANK_TRANSFER, CREDIT, CASH_WITHDRAW, CASH_DEPOSIT
 }

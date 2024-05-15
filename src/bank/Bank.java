@@ -20,7 +20,7 @@ public class Bank implements Serializable {
         {
             benefactorAccount.setAccountBalance(benefactor.getAccountBalance() - amount);
             beneficiaryAccount.setAccountBalance(beneficiaryAccount.getAccountBalance() + amount);
-            transaction = new Transaction(benefactor.getAccountNumber(), beneficiaryAccount.getAccountNumber(), TransactionType.BANK, amount, new Date());
+            transaction = new Transaction(benefactor.getAccountNumber(), beneficiaryAccount.getAccountNumber(), TransactionType.BANK_TRANSFER, amount, new Date());
             // Updating Transaction History of Bank
             bankData.addTransaction(transaction);
             bankData.saveTransaction();
@@ -38,5 +38,13 @@ public class Bank implements Serializable {
         //
         return true;
     }
+
+    public void deleteAccount(Account account){
+        BankData bankData = BankData.getInstance();
+        bankData.getAllAccounts().remove(account);
+        System.out.println("Account Deleted");
+        bankData.saveAccount();
+    }
+
 
 }

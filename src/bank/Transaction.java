@@ -6,8 +6,9 @@ import java.util.Date;
 public class Transaction implements Serializable {
     TransactionType transactionType;
     int benefactorAccountNumber;
-    int beneficiaryAccountNumber;
+    Integer beneficiaryAccountNumber;
     double amount;
+
     Date date;
 
 
@@ -21,6 +22,14 @@ public class Transaction implements Serializable {
     public Transaction(int benefactorAccountNumber, int beneficiaryAccountNumber, TransactionType transactionType, double amount, Date date){
         this.benefactorAccountNumber = benefactorAccountNumber;
         this.beneficiaryAccountNumber = beneficiaryAccountNumber;
+        this.amount = amount;
+        this.transactionType = transactionType;
+        this.date = date;
+    }
+
+    public Transaction(int benefactorAccountNumber, Integer o, TransactionType transactionType, double amount, Date date) {
+        this.benefactorAccountNumber = benefactorAccountNumber;
+        this.beneficiaryAccountNumber = null;
         this.amount = amount;
         this.transactionType = transactionType;
         this.date = date;
@@ -43,7 +52,9 @@ public class Transaction implements Serializable {
     }
 
     public int getBeneficiaryAccountNumber() {
+        if(beneficiaryAccountNumber == null) return 0;
         return beneficiaryAccountNumber;
+
     }
 
     public TransactionType getTransactionType() {

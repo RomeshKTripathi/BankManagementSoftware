@@ -1,15 +1,13 @@
 import account.Account;
 import account.Credentials;
-import bank.BankData;
-import bank.Branch;
-import bank.NormalUser;
-import bank.Transaction;
+import bank.*;
 
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+
     public static void main(String[] args) {
         BankData bankData = BankData.getInstance();
         Branch branch = new Branch();
@@ -51,14 +49,14 @@ public class Main {
                     }
                     break;
                 case 4:
-                    String label = "| FROM               | TO                 | AMOUNT   | TYPE     | DATE    " +
+                    String label = "| FROM               | TO                 | AMOUNT   | TYPE          | DATE    " +
                             "                     | ";
                     System.out.println(label);
                     for(Transaction transaction : bankData.getTransactions()){
                         String row = String.format("| %-19s",transaction.getBenefactorAccountNumber()) +
                                 String.format("| %-19s", transaction.getBeneficiaryAccountNumber())+
                                 String.format("| %-9s", transaction.getAmount())+
-                                String.format("| %-9s", transaction.getTransactionType())+
+                                String.format("| %-14s", transaction.getTransactionType())+
                                 String.format("| %-29s|",transaction.getDate().toString());
                         System.out.println(row);
                     }

@@ -3,6 +3,7 @@ package bank;
 import account.Account;
 import account.AccountType;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Branch extends Bank{
@@ -17,6 +18,7 @@ public class Branch extends Bank{
                 | Withdraw Money         1 |
                 | Deposit Money          2 |
                 | Open Account           3 |
+                | Delete Account         4 |
                 | Exit Branch            0 |
                 ----------------------------
                 """;
@@ -49,6 +51,13 @@ public class Branch extends Bank{
                 case 3:
                     createAccount();
                     break;
+                case 4:
+                    System.out.println("Enter Account number to Delete Account ");
+                    int accNumber = scanner.nextInt();
+                    Account account = bankData.getAccount(accNumber);
+                    if(account != null)
+                        deleteAccount(account);
+                    else System.out.println("Invalid Account Number");
                 default:
                     System.out.println("Please choose valid option from menu ...");
 

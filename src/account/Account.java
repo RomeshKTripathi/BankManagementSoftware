@@ -1,9 +1,12 @@
 package account;
 
+import bank.BankData;
 import bank.Transaction;
+import bank.TransactionType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Account implements Serializable {
@@ -25,11 +28,24 @@ public class Account implements Serializable {
 
     public void depositMoney(double amount){
         this.accountBalance += amount;
+        // Update Transaction List
+        Transaction transaction = new Transaction(this.accountNumber, null, TransactionType.CASH_DEPOSIT, amount, new Date());
+        Transaction bankTransaction = new Transaction(this.accountNumber, null, TransactionType.CASH_DEPOSIT, amount, new Date());
+
+        BankData.getInstance().addTransaction(bankTransaction);
+        this.addTransaction(transaction);
+        BankData.getInstance().saveTransaction();
     }
     public void withdrawMoney(double amount){
         if(this.accountBalance > amount){
             this.accountBalance -= amount;
         }
+        Transaction transaction = new Transaction(this.accountNumber, null, TransactionType.CASH_WITHDRAW, amount, new Date());
+        Transaction bankTransaction = new Transaction(this.accountNumber, null, TransactionType.CASH_WITHDRAW, amount, new Date());
+
+        BankData.getInstance().addTransaction(bankTransaction);
+        this.addTransaction(transaction);
+        BankData.getInstance().saveTransaction();
     }
     public void addTransaction(Transaction transaction){
         transactions.add(transaction);

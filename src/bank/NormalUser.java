@@ -70,13 +70,13 @@ public class NormalUser extends Bank{
     }
     public void printTransactionHistory(){
 
-        String label = "| FROM               | TO                 | AMOUNT   | TYPE     | DATE                         | ";
+        String label = "| FROM               | TO                 | AMOUNT   | TYPE          | DATE                         | ";
         System.out.println(label);
         for(Transaction transaction : account.getTransactions()){
             String row = String.format("| %-19s",transaction.getBenefactorAccountNumber()) +
                     String.format("| %-19s", transaction.getBeneficiaryAccountNumber())+
                     String.format("| %-9s", transaction.getAmount())+
-                    String.format("| %-9s", transaction.getTransactionType())+
+                    String.format("| %-14s", transaction.getTransactionType())+
                     String.format("| %-29s|",transaction.getDate().toString());
             System.out.println(row);
 
