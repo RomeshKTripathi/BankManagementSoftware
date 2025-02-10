@@ -9,6 +9,8 @@ import java.util.List;
 
 // Singleton class
 public class BankData {
+    boolean accountMutex = false;
+    boolean transactionMutex = false;
     static BankData instance = null;
     public ArrayList<Transaction> transactions = null;
     public ArrayList<Account> accounts = null;
@@ -82,6 +84,7 @@ public class BankData {
     }
     public void saveAccount(){
         try{
+            this.accountMutex = true;
             FileOutputStream file = new FileOutputStream(accountsFile, false);
             ObjectOutputStream out = new ObjectOutputStream(file);
 
@@ -93,10 +96,13 @@ public class BankData {
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }finally {
+            this.accountMutex = false;
         }
     };
     public void saveTransaction(){
         try{
+            this.transactionMutex = true;
             FileOutputStream file = new FileOutputStream(transactionsFile, false);
             ObjectOutputStream out = new ObjectOutputStream(file);
 
@@ -108,6 +114,8 @@ public class BankData {
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } finally {
+            this.transactionMutex = false;
         }
     };
 

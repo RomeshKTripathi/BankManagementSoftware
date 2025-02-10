@@ -12,13 +12,14 @@ public class Main {
         BankData bankData = BankData.getInstance();
         Branch branch = new Branch();
         Scanner scanner = new Scanner(System.in);
-        String menu = "---------------MENU---------------\n" +
-                "|  USER LOGIN                  1 |\n" +
-                "|  BRANCH LOGIN                2 |\n" +
-                "|  ALL ACCOUNTS                3 |\n" +
-                "|  TRANSACTIONS                4 |\n" +
-                "|  EXIT                        0 |\n" +
-                "----------------------------------";
+        String menu = """
+                ---------------MENU---------------
+                |  USER LOGIN                  1 |
+                |  BRANCH LOGIN                2 |
+                |  ALL ACCOUNTS                3 |
+                |  TRANSACTIONS                4 |
+                |  EXIT                        0 |
+                ----------------------------------""";
         while(true){
             System.out.println(menu);
             int option = scanner.nextInt();
@@ -45,7 +46,7 @@ public class Main {
                     break;
                 case 3:
                     for(Account account : bankData.getAllAccounts()){
-                        System.out.println(account.getAccountHolderName() + "   " + account.getAccountNumber());
+                        System.out.println(String.format("%-30s",account.getAccountHolderName()) + " | " + account.getAccountNumber());
                     }
                     break;
                 case 4:
